@@ -183,11 +183,15 @@ def define_podman_admin(app):
 
             try:
                 b.repositories = ",".join(
-                    request.form.to_dict(flat=False)["repositories"]
+                    request.form.to_dict(flat=False).get("repositories", [])
                 )
             except:
                 print(traceback.print_exc())
                 b.repositories = None
+
+            if not b.repositories:
+                b.repositories = None
+
             db.session.add(b)
             db.session.commit()
             podman = PodmanConfig.query.filter_by(id=1).first()
