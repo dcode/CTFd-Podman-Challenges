@@ -43,8 +43,12 @@ This plugin for CTFd will allow your competing teams/users to start podmanized i
 
 ## Installation / Configuration
 
-* Make the above required code change in CTFd 2.3.3 (`get_configurable_plugins`).
-* Drop the folder `podman_challenges` into `CTFd/CTFd/plugins` (Exactly this name).
+* Clone this repo into the CTFd plugins dir and name it `podman_challenges` (exactly this name is important)
+  
+  ```bash
+  git clone https://github.com/dcode/CTFd-Podman-Challenges.git podman_challenges
+  ```
+
 * Restart CTFd.
 * Navigate to `/admin/podman_config`. Add your configuration information. Click Submit.
 * Add your required repositories for this CTF. You can select multiple by holding CTRL when clicking. Click Submit.
