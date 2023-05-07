@@ -1,0 +1,10 @@
+[
+	{
+	    "name": "Podman Config",
+	    "route": "/admin/podman_config"
+	},
+	{
+	    "name": "Podman Status",
+	    "route": "/admin/podman_status"
+	}
+]

@@ -11,14 +11,14 @@ CTFd.plugin.run((_CTFd) => {
     });
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
-    $.getJSON("/api/v1/docker", function(result){
+    $.getJSON("/api/v1/podman", function(result){
         $.each(result['data'], function(i, item){
-            if (item.name == 'Error in Docker Config!') { 
-                document.docker_form.dockerimage_select.disabled = true;
-                $("label[for='DockerImage']").text('Docker Image ' + item.name)
+            if (item.name == 'Error in Podman Config!') { 
+                document.podman_form.podmanimage_select.disabled = true;
+                $("label[for='PodmanImage']").text('Podman Image ' + item.name)
             }
             else {
-                $("#dockerimage_select").append($("<option />").val(item.name).text(item.name));
+                $("#podmanimage_select").append($("<option />").val(item.name).text(item.name));
             }
         });
     });

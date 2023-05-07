@@ -1,8 +1,8 @@
-# CTFd Docker Plugin
-This plugin for CTFd will allow your competing teams/users to start dockerized images for presented challenges. It adds a challenge type "docker" that can be assigned a specific docker image/tag. A few notable requirements:
+# CTFd Podman Plugin
+This plugin for CTFd will allow your competing teams/users to start podmanized images for presented challenges. It adds a challenge type "podman" that can be assigned a specific podman image/tag. A few notable requirements:
 
-* Docker Config must be set first. You can access this via `/admin/docker_config`. Currently supported config is pure http (no encryption/authentication) or full TLS with client certificate validation. Configuration information for TLS can be found here: https://docs.docker.com/engine/security/https/
-* This plugin is written so that challenges are stored by tags. For example, StormCTF stores all docker challenges for InfoSeCon2019 in the `stormctf/infosecon2019` repository. A challenge example would be `stormctf/infosecon2019:arbit`. This is how you would call the challenge when creating a new challenge.
+* Podman Config must be set first. You can access this via `/admin/podman_config`. Currently supported config is pure http (no encryption/authentication) or full TLS with client certificate validation. Configuration information for TLS can be found here: https://docs.podman.com/engine/security/https/
+* This plugin is written so that challenges are stored by tags. For example, StormCTF stores all podman challenges for InfoSeCon2019 in the `stormctf/infosecon2019` repository. A challenge example would be `stormctf/infosecon2019:arbit`. This is how you would call the challenge when creating a new challenge.
 
 
 ## Important Notes
@@ -32,25 +32,25 @@ This plugin for CTFd will allow your competing teams/users to start dockerized i
 
 ## Features
 
-* Allows players to create their own docker container for docker challenges.
+* Allows players to create their own podman container for podman challenges.
 * 5 minute revert timer.
 * 2 hour stale container nuke.
-* Status panel for Admins to manage docker containers currently active.
-* Support for client side validation TLS docker api connections (HIGHLY RECOMMENDED).
-* Docker container kill on solve.
+* Status panel for Admins to manage podman containers currently active.
+* Support for client side validation TLS podman api connections (HIGHLY RECOMMENDED).
+* Podman container kill on solve.
 * (Mostly) Seamless integration with CTFd.
 * **Untested**: _Should_ be able to seamlessly integrate with other challenge types.
 
 ## Installation / Configuration
 
 * Make the above required code change in CTFd 2.3.3 (`get_configurable_plugins`).
-* Drop the folder `docker_challenges` into `CTFd/CTFd/plugins` (Exactly this name).
+* Drop the folder `podman_challenges` into `CTFd/CTFd/plugins` (Exactly this name).
 * Restart CTFd.
-* Navigate to `/admin/docker_config`. Add your configuration information. Click Submit.
+* Navigate to `/admin/podman_config`. Add your configuration information. Click Submit.
 * Add your required repositories for this CTF. You can select multiple by holding CTRL when clicking. Click Submit.
-* Click Challenges, Select `docker` for challenge type. Create a challenge as normal, but select the correct docker tag for this challenge.
-* Double check the front end shows "Start Docker Instance" on the challenge.
-* Confirm users are able to start/revert and access docker challenges.
+* Click Challenges, Select `podman` for challenge type. Create a challenge as normal, but select the correct podman tag for this challenge.
+* Double check the front end shows "Start Podman Instance" on the challenge.
+* Confirm users are able to start/revert and access podman challenges.
 * Host an awesome CTF!
 
 ### Update: 20210206

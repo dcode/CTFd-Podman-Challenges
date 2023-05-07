@@ -2,7 +2,7 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container">
-        <h1>Docker Status</h1>
+        <h1>Podman Status</h1>
     </div>
 </div>
 <div class="container">
@@ -15,29 +15,29 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             {% endfor %}
-            {% if dockers %}
-            <table id='dockers' class="table table-striped">
+            {% if podmans %}
+            <table id='podmans' class="table table-striped">
                 <thead>
                     <tr>
                         <th width="10px" class="text-center" style="cursor: pointer;" onclick="sortTable(0)">ID</th>
-                        <th class="text-left" style="cursor: pointer;" onclick="sortTable(1)">{% if dockers[0].team_id %}Team{% else %}User{% endif %}</th>
-                        <th class="text-left" style="cursor: pointer;" onclick="sortTable(2)">Docker Image</th>
+                        <th class="text-left" style="cursor: pointer;" onclick="sortTable(1)">{% if podmans[0].team_id %}Team{% else %}User{% endif %}</th>
+                        <th class="text-left" style="cursor: pointer;" onclick="sortTable(2)">Podman Image</th>
                         <th class="text-left" style="cursor: pointer;" onclick="sortTable(3)">Instance ID</th>
                         <th class="text-left">Revoke</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for docker in dockers %}
-                    <tr id='tr_{{docker.instance_id}}' name='{{docker.id}}'>
-                        <td class='text-center' value='{{docker.id}}'>{{docker.id}}</td>
-                        {% if docker.team_id %}
-                        <td class='text-center' value='{{docker.team_id | safe }}'>{{docker.team_id | safe }}</td>
+                    {% for podman in podmans %}
+                    <tr id='tr_{{podman.instance_id}}' name='{{podman.id}}'>
+                        <td class='text-center' value='{{podman.id}}'>{{podman.id}}</td>
+                        {% if podman.team_id %}
+                        <td class='text-center' value='{{podman.team_id | safe }}'>{{podman.team_id | safe }}</td>
                         {% else %}
-                        <td class='text-center' value='{{docker.team_id | safe }}'>{{docker.user_id | safe }}</td>
+                        <td class='text-center' value='{{podman.team_id | safe }}'>{{podman.user_id | safe }}</td>
                         {% endif %}
-                        <td class='text-center' value='{{docker.docker_image}}'>{{docker.docker_image}}</td>
-                        <td class='text-center' value='{{docker.instance_id | truncate(15)}}'>{{docker.instance_id | truncate(15)}}</td>
-                        <td class='text-center'><a id="delete_{{docker.instance_id}}" style="cursor: pointer;" class="fas fa-trash" onclick="check_nuke_container('{{docker.instance_id}}', false)"></a></td>
+                        <td class='text-center' value='{{podman.podman_image}}'>{{podman.podman_image}}</td>
+                        <td class='text-center' value='{{podman.instance_id | truncate(15)}}'>{{podman.instance_id | truncate(15)}}</td>
+                        <td class='text-center'><a id="delete_{{podman.instance_id}}" style="cursor: pointer;" class="fas fa-trash" onclick="check_nuke_container('{{podman.instance_id}}', false)"></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -46,7 +46,7 @@
                 <button type="button" class="btn btn-danger" onclick="check_nuke_container(null, true)">Nuke All Containers</button>
             </div>
             {% else %}
-            <h3 class='text-center'> No Docker Containers Active</h3>
+            <h3 class='text-center'> No Podman Containers Active</h3>
             {% endif %}
         </div>
     </div>
@@ -56,7 +56,7 @@
 <script>
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("dockers");
+    table = document.getElementById("podmans");
     switching = true;
     dir = "asc";
     while (switching) {
@@ -105,7 +105,7 @@ function nuke_container(instance, all) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             if (all == true) {
-                window.location = '{{ script_root }}/admin/docker_status'
+                window.location = '{{ script_root }}/admin/podman_status'
             }
             else {
                 document.getElementById("tr_" + instance).style.display = "none";
@@ -113,7 +113,7 @@ function nuke_container(instance, all) {
         } else if (this.readyState == 4 && this.status != 200) {
             ezal({
                 title: "Attention!",
-                body: "Error when Deleting Docker Container",
+                body: "Error when Deleting Podman Container",
                 button: "Got it!",
             });
         }
